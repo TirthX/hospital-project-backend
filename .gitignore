@@ -1,0 +1,54 @@
+# ── Python & Bytecode ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# ── Virtual Environments ─────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Django Specific ──────────────────────────────────────────────
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+db.sqlite3-shm
+db.sqlite3-wal
+
+# Static and media files generated at runtime
+staticfiles/
+media/
+
+# ── Environment Variables & Secrets ──────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Testing & Code Quality ───────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ── IDEs & Operating System ──────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── Machine Learning Artifacts ───────────────────────────────────
+# Note: ai_engine/*.joblib and model_metrics.json are tracked
+# in git so the platform functions immediately on deployment.
+# Uncomment below only if you store models in S3/cloud storage.
+# ai_engine/*.joblib
+# ai_engine/model_metrics.json

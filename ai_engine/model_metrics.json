@@ -1,0 +1,41 @@
+{
+  "dataset_rows": 8760,
+  "train_rows": 7008,
+  "test_rows": 1752,
+  "n_estimators": 100,
+  "random_state": 42,
+  "features": [
+    "day_of_week",
+    "hour",
+    "is_weekend",
+    "month",
+    "inflow_rolling_6h",
+    "icu_rolling_6h"
+  ],
+  "patient_inflow": {
+    "mae": 1.6997,
+    "baseline_mae": 2.2723,
+    "r2": 0.3583,
+    "feature_importance": {
+      "day_of_week": 0.0689,
+      "hour": 0.4688,
+      "is_weekend": 0.0123,
+      "month": 0.1029,
+      "inflow_rolling_6h": 0.1583,
+      "icu_rolling_6h": 0.1889
+    }
+  },
+  "icu_occupancy": {
+    "mae": 0.823,
+    "baseline_mae": 2.4455,
+    "r2": 0.8401,
+    "feature_importance": {
+      "day_of_week": 0.016,
+      "hour": 0.0287,
+      "is_weekend": 0.0021,
+      "month": 0.0192,
+      "inflow_rolling_6h": 0.0352,
+      "icu_rolling_6h": 0.8988
+    }
+  }
+}
