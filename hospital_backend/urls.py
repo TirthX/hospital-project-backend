@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import include, path
 
 def root_status_view(request):
+    if request.method == 'HEAD':
+        return HttpResponse(status=200)
     return JsonResponse({
         'status': 'healthy',
         'service': 'Hospital Intelligence Platform Backend',
