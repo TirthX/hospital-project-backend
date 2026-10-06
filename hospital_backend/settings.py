@@ -128,11 +128,18 @@ default_cors = (
     'http://localhost:5173,http://127.0.0.1:5173,'
     'http://localhost:4173,http://127.0.0.1:4173'
 )
+
+def _sanitize_origin(origin: str) -> str:
+    origin = origin.strip().rstrip('/')
+    if origin and not origin.startswith(('http://', 'https://')):
+        origin = f'https://{origin}'
+    return origin
+
 cors_env = os.environ.get('DJANGO_CORS_ORIGINS', '')
-if cors_env:
-    CORS_ALLOWED_ORIGINS = [o.strip() for o in cors_env.split(',') if o.strip()]
-else:
-    CORS_ALLOWED_ORIGINS = [o.strip() for o in default_cors.split(',') if o.strip()]
+raw_cors = cors_env if cors_env.strip() else default_cors
+CORS_ALLOWED_ORIGINS = [
+    _sanitize_origin(o) for o in raw_cors.split(',') if o.strip()
+]
 
 # Regex allowlist automatically matches any Vercel preview or production deploy
 CORS_ALLOWED_ORIGIN_REGEXES = [
@@ -141,10 +148,9 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = [
-    o if o.startswith('http') else f"https://{o}"
-    for o in CORS_ALLOWED_ORIGINS
-] + ['https://*.vercel.app', 'https://*.onrender.com']
+CSRF_TRUSTED_ORIGINS = list({
+    _sanitize_origin(o) for o in CORS_ALLOWED_ORIGINS
+} | {'https://*.vercel.app', 'https://*.onrender.com'})
 
 # REST Framework
 REST_FRAMEWORK = {
